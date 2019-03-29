@@ -22,7 +22,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 
  * There is the file data.sql in src/main/resources directory with some inserts of employees.
  * It should load at the beginning of the application.
- * But you can copy this file and run manually using /h2-console URI.
+ * But you can copy the content of this file and run manually using /h2-console URI.
  * 
  * There is a Swagger Documentation in src/main/doc directory
  * You can access the file index.html
