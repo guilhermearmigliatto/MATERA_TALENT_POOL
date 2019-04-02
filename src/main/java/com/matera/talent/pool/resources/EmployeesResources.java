@@ -26,7 +26,7 @@ import com.matera.talent.pool.services.EmployeesService;
 public class EmployeesResources {
 
 	@Autowired
-	EmployeesService employeesService;
+	protected EmployeesService employeesService;
 
 	/**
 	 * Get a list of all ACTIVE Employees

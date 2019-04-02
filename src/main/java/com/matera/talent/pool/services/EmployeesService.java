@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.matera.talent.pool.domain.Employee;
+import com.matera.talent.pool.domain.Employee.EmployeeBuilder;
 import com.matera.talent.pool.domain.Employee.Status;
 import com.matera.talent.pool.repository.EmployeesRepository;
 import com.matera.talent.pool.services.exceptions.EmployeeNotFoundException;
@@ -20,7 +21,7 @@ import com.matera.talent.pool.services.exceptions.EmployeeNotFoundException;
 public class EmployeesService {
 
 	@Autowired
-	EmployeesRepository employeesRepository;
+	protected EmployeesRepository employeesRepository;
 	
 	/**
 	 * List all employees who are not INACTIVE
@@ -41,11 +42,15 @@ public class EmployeesService {
 	 * @return Employee - The new Employee created 
 	 */
 	public Employee create(Employee employee) {
-		// Setting id to null to ensure create new employee.
-		employee.setId(null);
-		employee.setStatus(Status.ACTIVE);
-		employee = employeesRepository.save(employee);
-		return employee;
+		
+		EmployeeBuilder builder = new EmployeeBuilder(employee);
+		Employee newEmployee = builder
+				.id(null)
+				.status(Status.ACTIVE)
+				.build();
+
+		newEmployee = employeesRepository.save(newEmployee);
+		return newEmployee;
 	}
 	
 	/**
@@ -58,32 +63,43 @@ public class EmployeesService {
 		Employee employee = findActiveEmployee(id);
 		return employee;
 	}
-	
+
 	/**
 	 * Remove an Employee by id
 	 * @param id - The identifier of the Employee to be removed
+	 * @return 
 	 * @throws EmployeeNotFoundException - Throws exception if employee does not exist or is INACTIVE.
 	 */
-	public void remove(Long id) {
+	public Employee remove(Long id) {
 		Employee employee = findActiveEmployee(id);
-		employee.setStatus(Status.INACTIVE);
-		employeesRepository.save(employee);
+		
+		EmployeeBuilder builder = new EmployeeBuilder(employee);
+		Employee newEmployee = builder
+				.status(Status.INACTIVE)
+				.build();
+
+		 Employee removed = employeesRepository.save(newEmployee);
+		 return removed;
 	}
 	
 	/**
 	 * Update an Employee by id
 	 * @param employee - New informations of Employee
 	 * @param id - The identifier of the Employee to be updated
+	 * @return 
 	 */
-	public void update(Employee employee, Long id) {
+	public Employee update(Employee employee, Long id) {
 		
 		// Check if employee exist
 		findActiveEmployee(id);
+		
+		EmployeeBuilder builder = new EmployeeBuilder(employee);
+		Employee newEmployee = builder
+				.id(id)
+				.status(Status.ACTIVE)
+				.build();
 
-		// Setting the id to ensure the correct employee is updated.
-		employee.setId(id);
-		employee.setStatus(Status.ACTIVE);
-		employeesRepository.save(employee);
+		return employeesRepository.save(newEmployee);
 	}
 	
 	/**
