@@ -17,7 +17,6 @@ Next, import the project in one Java IDE and run the main method in the main cla
 The Main class of this application is MateraTalentPoolApplication <br/>
 You need to run the method main of this class and search for some employees with `/employees` URI in a normal browser. <br/>
 For example: `http://localhost:8080/employees` <br/>
-<br/>
 
 You can also run the jar file in the root of this project <br/>
 Install Java JDK 1.8 or higher in you computer and use the command: <br/>
