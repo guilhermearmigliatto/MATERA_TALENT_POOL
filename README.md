@@ -49,7 +49,7 @@ But you can copy the content of this file and run manually using `/h2-console` U
 
 ## Postman Examples
 
-A Postman file called `postman_collection.json` is committed in the directory src/main/doc <br/>
+A Postman file called `postman_collection.json` is committed in the directory `src/main/doc` <br/>
 This file contains examples of URI's and json objects to use in this application. <br/>
 You can see examples of methods GET, PUT, POST and DELETE. <br/>
 You need to download the Postman application in (`https://www.getpostman.com`) and import this file to see and run this examples.
